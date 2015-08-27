@@ -1,11 +1,11 @@
 package com.jdc.skill.dao;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import java.io.IOException;
 import java.util.List;
 
-import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
@@ -29,12 +29,6 @@ public class CategoryDaoTest {
 		dao = new BaseModel<Category>(Category.class, Category::convert);
 	}
 	
-	@AfterClass
-	public static void finish() throws IOException {
-		DbHelper db = new DbHelper();
-		db.truncateTables("category");
-	}
-
 	@Test
 	public void test1() {
 		List<Category> list = dao.getAll();

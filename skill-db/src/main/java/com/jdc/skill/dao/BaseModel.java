@@ -1,6 +1,7 @@
 package com.jdc.skill.dao;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -10,6 +11,8 @@ import java.util.List;
 import java.util.Properties;
 import java.util.function.Function;
 
+import javax.sql.DataSource;
+
 import com.jdc.skill.data.Entity;
 
 public class BaseModel<T extends Entity> implements Model<T>{
@@ -17,6 +20,7 @@ public class BaseModel<T extends Entity> implements Model<T>{
 	private Class<T> entity;
 	private Properties props;
 	private Function<ResultSet, T> converter;
+	private DataSource ds;
 	
 	public BaseModel(Class<T> entity, Function<ResultSet, T> converter) {
 		this.entity = entity;
@@ -29,12 +33,25 @@ public class BaseModel<T extends Entity> implements Model<T>{
 		}
 	}
 
+	public BaseModel(Class<T> entity, Function<ResultSet, T> converter, DataSource ds, InputStream configuration) {
+		this.ds = ds;
+		this.entity = entity;
+		this.converter = converter;
+		try {
+			props = new Properties();
+			props.load(configuration);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
 	@Override
 	public List<T> getAll() {
 		String sql = String.format(getSql("sql.selectAll"), getTableName());
 		List<T> list = new ArrayList<>();
 		
-		try(Connection conn = ConnectionManager.getConnection();
+		try(Connection conn = getConnection();
 				PreparedStatement stmt = conn.prepareStatement(sql)) {
 			
 			ResultSet rs = stmt.executeQuery();
@@ -58,7 +75,7 @@ public class BaseModel<T extends Entity> implements Model<T>{
 		
 		System.out.println(sql);
 		
-		try(Connection conn = ConnectionManager.getConnection();
+		try(Connection conn = getConnection();
 				PreparedStatement stmt = conn.prepareStatement(sql)) {
 			
 			List<Object> params = t.getInsertParams().getValues();
@@ -98,6 +115,14 @@ public class BaseModel<T extends Entity> implements Model<T>{
 	
 	private String getTableName() {
 		return entity.getSimpleName().toLowerCase();
+	}
+	
+	private Connection getConnection() throws SQLException {
+		if(null != ds) {
+			return ds.getConnection();
+		}
+		
+		return ConnectionManager.getConnection();
 	}
 
 }
