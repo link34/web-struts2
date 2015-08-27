@@ -45,7 +45,7 @@ public class CategoryDaoTest {
 		Category c = new Category();
 		c.setCategory("Test Category");
 		
-		dao.insert(c);
+//		dao.insert(c);
 		
 		List<Category> list = dao.getAll();
 		assertEquals(1, list.size());
@@ -66,7 +66,7 @@ public class CategoryDaoTest {
 	
 	@Test
 	public void test4() {
-		dao.update(1, "New Category");
+//		dao.update(1, "New Category");
 		
 		Category c = dao.findById(1);
 		assertNotNull(c);
