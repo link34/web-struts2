@@ -1,6 +1,9 @@
 package com.jdc.skill.data;
 
-public class Category {
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+public class Category implements Entity{
 
 	private int category_id;
 	private String category;
@@ -16,6 +19,26 @@ public class Category {
 	}
 	public void setCategory(String category) {
 		this.category = category;
+	}
+	
+	public static Category convert(ResultSet rs) {
+		Category c = null;
+		try {
+			c = new Category();
+			c.setCategory_id(rs.getInt("category_id"));
+			c.setCategory(rs.getString("category"));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return c;
+	}
+	@Override
+	public Param getId() {
+		return Param.getInstance().put("category_id", category_id);
+	}
+	@Override
+	public Param getInsertParams() {
+		return Param.getInstance().put("category", category);
 	}
 	
 }

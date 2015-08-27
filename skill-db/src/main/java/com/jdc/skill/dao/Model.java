@@ -2,7 +2,9 @@ package com.jdc.skill.dao;
 
 import java.util.List;
 
-public interface Model<T> {
+import com.jdc.skill.data.Entity;
+
+public interface Model<T extends Entity> {
 	
 	List<T> getAll();
 	void create(T t);

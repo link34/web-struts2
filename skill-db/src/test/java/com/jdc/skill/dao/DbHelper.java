@@ -1,18 +1,13 @@
 package com.jdc.skill.dao;
 
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class DbHelper extends Dao{
+public class DbHelper {
 
-	public DbHelper() throws IOException {
-		super();
-	}
-	
 	public void truncateTables(String ... tables) {
-		try(Connection conn = getConnection();
+		try(Connection conn = ConnectionManager.getConnection();
 				Statement stmt = conn.createStatement()) {
 			
 			stmt.execute("set foreign_key_checks = 0");
