@@ -1,0 +1,77 @@
+package com.jdc.skill.dao;
+
+import static org.junit.Assert.*;
+
+import java.io.IOException;
+import java.util.List;
+
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+
+import com.jdc.skill.data.Category;
+
+public class CategoryDaoTest {
+	
+	CategoryDao dao;
+	
+	@BeforeClass
+	public static void init() throws IOException {
+		
+		DbHelper db = new DbHelper();
+		db.truncateTables("category");
+	}
+
+	@Before
+	public void setUp() throws Exception {
+		dao = new CategoryDao();
+	}
+	
+	@AfterClass
+	public static void finish() throws IOException {
+		DbHelper db = new DbHelper();
+		db.truncateTables("category");
+	}
+
+	@Test
+	public void test1() {
+		List<Category> list = dao.getAll();
+		assertEquals(0, list.size());
+	}
+	
+	@Test
+	public void test2() {
+		Category c = new Category();
+		c.setCategory("Test Category");
+		
+		dao.insert(c);
+		
+		List<Category> list = dao.getAll();
+		assertEquals(1, list.size());
+		
+		Category result = list.get(list.size() -1);
+		assertEquals(c.getCategory(), result.getCategory());
+	}
+	
+	@Test
+	public void test3() {
+		
+		Category c = dao.findById(1);
+		assertNotNull(c);
+		
+		assertEquals("Test Category", c.getCategory());
+		
+	}
+	
+	@Test
+	public void test4() {
+		dao.update(1, "New Category");
+		
+		Category c = dao.findById(1);
+		assertNotNull(c);
+		
+		assertEquals("New Category", c.getCategory());
+	}
+
+}
