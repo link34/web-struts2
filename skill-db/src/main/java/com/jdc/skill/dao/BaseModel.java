@@ -98,6 +98,7 @@ public class BaseModel<T extends Entity> implements Model<T>{
 
 	@Override
 	public T findById(Param id) {
+		// set sql
 		String sql = String.format(getSql("sql.findById"), getTableName(), id.getKeyString());
 		
 		try(Connection conn = getConnection();
