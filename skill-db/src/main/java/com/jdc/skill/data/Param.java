@@ -57,4 +57,25 @@ public class Param {
 	public List<Object> getValues() {
 		return new ArrayList<Object>(params.values());
 	}
+	
+	public String getKeyString() {
+		StringBuilder sb = new StringBuilder();
+		List<String> keys = new ArrayList<String>(params.keySet());
+		
+		sb.append("(");
+		
+		for (int i = 0; i < keys.size(); i++) {
+			if(i > 0) {
+				sb.append("and ");
+			}
+			
+			sb.append(keys.get(i));
+			
+			sb.append(" = ?");
+		}
+		
+		sb.append(")");
+		
+		return sb.toString();
+	}
 }

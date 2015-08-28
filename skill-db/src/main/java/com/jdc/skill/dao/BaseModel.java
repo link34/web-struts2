@@ -14,6 +14,7 @@ import java.util.function.Function;
 import javax.sql.DataSource;
 
 import com.jdc.skill.data.Entity;
+import com.jdc.skill.data.Param;
 
 public class BaseModel<T extends Entity> implements Model<T>{
 	
@@ -73,8 +74,6 @@ public class BaseModel<T extends Entity> implements Model<T>{
 				getTableName(), 
 				t.getInsertParams().getInsertString());
 		
-		System.out.println(sql);
-		
 		try(Connection conn = getConnection();
 				PreparedStatement stmt = conn.prepareStatement(sql)) {
 			
@@ -91,26 +90,101 @@ public class BaseModel<T extends Entity> implements Model<T>{
 		}
 	}
 
-	@Override
-	public void delete(Object id) {
-		// TODO Auto-generated method stub
-		
+	
+	private String getSql(String id) {
+		return props.getProperty(id);
 	}
+	
 
 	@Override
-	public T findById(Object id) {
-		// TODO Auto-generated method stub
+	public T findById(Param id) {
+		String sql = String.format(getSql("sql.findById"), getTableName(), id.getKeyString());
+		
+		try(Connection conn = getConnection();
+				PreparedStatement stmt = conn.prepareStatement(sql)) {
+			List<Object> params = id.getValues();
+			// set params
+			for(int i=0; i < params.size(); i++) {
+				stmt.setObject(i + 1, params.get(i));
+			}
+			
+			// execute sql
+			ResultSet rs = stmt.executeQuery();
+			
+			// get results
+			while(rs.next()) {
+				return converter.apply(rs);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		return null;
 	}
 
 	@Override
-	public void update(String set, String where, List<Object> param) {
-		// TODO Auto-generated method stub
+	public void delete(String where, List<Object> params) {
+		String sql = String.format(getSql("sql.delete"), getTableName(), where);
 		
+		try(Connection conn = getConnection();
+				PreparedStatement stmt = conn.prepareStatement(sql)) {
+			// set params
+			for(int i=0; i < params.size(); i++) {
+				stmt.setObject(i + 1, params.get(i));
+			}
+			
+			// execute sql
+			stmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}		
 	}
-	
-	private String getSql(String id) {
-		return props.getProperty(id);
+
+	@Override
+	public void update(String set, String where, List<Object> params) {
+		String sql = String.format(getSql("sql.update"), getTableName(), set, where);
+		
+		try(Connection conn = getConnection();
+				PreparedStatement stmt = conn.prepareStatement(sql)) {
+			// set params
+			for(int i=0; i < params.size(); i++) {
+				stmt.setObject(i + 1, params.get(i));
+			}
+			
+			// execute sql
+			stmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public List<T> getWhere(String where, List<Object> params) {
+		String sql = String.format(getSql("sql.getWhere"), getTableName(), where);
+		List<T> list = new ArrayList<>();
+		
+		try(Connection conn = getConnection();
+				PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+			// set params
+			for(int i=0; i < params.size(); i++) {
+				stmt.setObject(i + 1, params.get(i));
+			}
+			
+			// execute query
+			ResultSet rs = stmt.executeQuery();
+			
+			// get result
+			while(rs.next()) {
+				list.add(converter.apply(rs));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return list;
 	}
 	
 	private String getTableName() {
