@@ -9,8 +9,8 @@ import javax.sql.DataSource;
 import com.jdc.skill.dao.BaseModel;
 import com.jdc.skill.dao.Model;
 import com.jdc.skill.data.Employee;
-import com.jdc.skill.listener.DbConfiguration;
-import com.jdc.skill.listener.DbResourse;
+import com.jdc.skill.resource.DbConfiguration;
+import com.jdc.skill.resource.DbResourse;
 
 public class ModelProducer {
 	

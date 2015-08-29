@@ -1,4 +1,4 @@
-package com.jdc.skill.listener;
+package com.jdc.skill.resource;
 
 import java.io.InputStream;
 

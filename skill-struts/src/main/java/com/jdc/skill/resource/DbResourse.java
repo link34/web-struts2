@@ -1,9 +1,6 @@
-package com.jdc.skill.listener;
+package com.jdc.skill.resource;
 
-import static java.lang.annotation.ElementType.FIELD;
-import static java.lang.annotation.ElementType.METHOD;
-import static java.lang.annotation.ElementType.PARAMETER;
-import static java.lang.annotation.ElementType.TYPE;
+import static java.lang.annotation.ElementType.*;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.Retention;
@@ -16,6 +13,6 @@ import javax.inject.Qualifier;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(value={FIELD, METHOD, TYPE, PARAMETER})
 @Documented
-public @interface DbConfiguration {
+public @interface DbResourse {
 
 }
