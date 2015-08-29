@@ -1,34 +1,34 @@
 package com.jdc.skill.listener;
 
 import java.io.InputStream;
-import java.util.Map;
 
+import javax.annotation.Resource;
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Produces;
+import javax.inject.Inject;
+import javax.servlet.ServletContext;
 import javax.sql.DataSource;
-
-import org.apache.struts2.ServletActionContext;
-
-import com.opensymphony.xwork2.ActionContext;
 
 @ApplicationScoped
 public class ResourceProducer {
+	
+	@Resource(name="jdbc/skill_db")
+	private DataSource datasource;
+	
+	@Inject
+	private ServletContext servletContext;
 
 
 	@Produces
 	@DbResourse
-	public DataSource getDataSource() {
-
-		Map<String, Object> application = ActionContext.getContext()
-				.getApplication();
-		return (DataSource) application.get("Datasource");
+	public DataSource getDatasource() {
+		return datasource;
 	}
 
 	@Produces
 	@DbConfiguration
 	public InputStream getConfiguration() {
-		return ServletActionContext.getServletContext().getResourceAsStream(
-				"/WEB-INF/database.properties");
+		return servletContext.getResourceAsStream("/WEB-INF/database.properties");
 	}
 	
 }
