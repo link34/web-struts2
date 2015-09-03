@@ -53,24 +53,29 @@ public class EmployeeServlet extends HttpServlet {
 		
 		sb.append("<body>");
 
-		sb.append("<table>");
-		sb.append("<tr>");
-		sb.append("<th>Name</th>");
-		sb.append("<th>Phone</th>");
-		sb.append("<th>Email</th>");
-		sb.append("<th>Address</th>");
-		sb.append("</tr>");
-
-		for(Employee e : list) {
+		if(null != list) {
+			
+			sb.append("<table>");
 			sb.append("<tr>");
-			sb.append("<td>").append(e.getName()).append("</td>");
-			sb.append("<td>").append(e.getPhone()).append("</td>");
-			sb.append("<td>").append(e.getEmail()).append("</td>");
-			sb.append("<td>").append(e.getAddress()).append("</td>");
+			sb.append("<th>Name</th>");
+			sb.append("<th>Phone</th>");
+			sb.append("<th>Email</th>");
+			sb.append("<th>Address</th>");
 			sb.append("</tr>");
+
+			for(Employee e : list) {
+				sb.append("<tr>");
+				sb.append("<td>").append(e.getName()).append("</td>");
+				sb.append("<td>").append(e.getPhone()).append("</td>");
+				sb.append("<td>").append(e.getEmail()).append("</td>");
+				sb.append("<td>").append(e.getAddress()).append("</td>");
+				sb.append("</tr>");
+			}
+			sb.append("</table>");
+		} else {
+			sb.append("<h3>There is no data to display</h3>");
 		}
 
-		sb.append("</table>");
 		sb.append("</body>");
 		sb.append("</html>");
 		response.getWriter().write(sb.toString());
