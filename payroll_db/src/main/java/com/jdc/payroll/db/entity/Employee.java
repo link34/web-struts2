@@ -1,8 +1,37 @@
 package com.jdc.payroll.db.entity;
 
+import java.lang.reflect.Field;
 import java.util.Date;
 
-public class Employee {
+import com.jdc.db.Entity;
+import com.jdc.db.Param;
+
+public class Employee implements Entity{
+	
+	@Override
+	public Param getIdParam() {
+		return Param.getInstance().put("emp_cd", emp_cd);
+	}
+	@Override
+	public Param getInsertParams() {
+		
+		Param p = null;
+		
+		try {
+			p = Param.getInstance();
+			
+			Field[] fields = this.getClass().getDeclaredFields();
+			
+			for(Field f : fields) {
+				f.setAccessible(true);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return p;
+	}
+	
 	private String emp_cd;
 	private String position_cd;
 	private String name;
@@ -102,5 +131,6 @@ public class Employee {
 	public void setAddress(String address) {
 		this.address = address;
 	}
+
 
 }

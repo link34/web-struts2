@@ -1,6 +1,25 @@
 package com.jdc.db;
 
+import java.sql.Date;
+import java.sql.Timestamp;
+
 public interface Entity {
-	Param getId();
+	Param getIdParam();
 	Param getInsertParams();
+	
+	public default Date getDate(java.util.Date date) {
+		return new Date(date.getTime());
+	}
+	
+	public default Timestamp getTimeStamp(java.util.Date date) {
+		return new Timestamp(date.getTime());
+	}
+	
+	public default java.util.Date getJavaDate(Date date) {
+		return new java.util.Date(date.getTime());
+	}
+	
+	public default java.util.Date getJavaDate(Timestamp date) {
+		return new java.util.Date(date.getTime());
+	}
 }

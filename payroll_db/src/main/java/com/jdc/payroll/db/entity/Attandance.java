@@ -1,8 +1,41 @@
 package com.jdc.payroll.db.entity;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Date;
 
-public class Attandance {
+import com.jdc.db.Entity;
+import com.jdc.db.Param;
+
+public class Attandance implements Entity{
+	
+	@Override
+	public Param getInsertParams() {
+		return Param.getInstance()
+				.put("emp_cd", att_date)
+				.put("att_date", att_date)
+				.put("start_time", start_time)
+				.put("end_time", end_time);
+	}
+	@Override
+	public Param getIdParam() {
+		return Param.getInstance().put("id", id);
+	}
+	
+	public static Attandance convert(ResultSet rs) {
+		Attandance a = null;
+		try {
+			a = new Attandance();
+			a.setAtt_date(rs.getDate("att_date"));
+			a.setEmp_cd(rs.getString("emp_cd"));
+			a.setEnd_time(rs.getTimestamp("end_time"));
+			a.setId(rs.getInt("id"));
+			a.setStart_time(rs.getTimestamp("start_time"));
+		} catch (SQLException e) {
+			
+		}
+		return a;
+	}
 	
 	private int id;
 	private String emp_cd;
@@ -40,4 +73,5 @@ public class Attandance {
 	public void setEnd_time(Date end_time) {
 		this.end_time = end_time;
 	}
+	
 }
