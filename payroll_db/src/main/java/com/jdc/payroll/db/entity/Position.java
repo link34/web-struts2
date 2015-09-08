@@ -15,6 +15,7 @@ public class Position implements Entity{
 	@Override
 	public Param getInsertParams() {
 		return Param.getInstance()
+				.put("position_cd",position_cd )
 				.put("description", description);
 	}
 	
@@ -22,6 +23,7 @@ public class Position implements Entity{
 		Position p=null;
 		try {
 			p=new Position();
+			p.setPosition_cd(rs.getString("position_cd"));
 			p.setDescription(rs.getString("description"));
 			
 		} catch (Exception e) {
