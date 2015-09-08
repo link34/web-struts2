@@ -15,11 +15,11 @@ public interface Entity {
 		return new Timestamp(date.getTime());
 	}
 	
-	public default java.util.Date getJavaDate(Date date) {
+	public static java.util.Date getJavaDate(Date date) {
 		return new java.util.Date(date.getTime());
 	}
 	
-	public default java.util.Date getJavaDate(Timestamp date) {
+	public static java.util.Date getJavaDate(Timestamp date) {
 		return new java.util.Date(date.getTime());
 	}
 }

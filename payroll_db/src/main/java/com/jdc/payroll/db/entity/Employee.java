@@ -1,6 +1,7 @@
 package com.jdc.payroll.db.entity;
 
 import java.lang.reflect.Field;
+import java.sql.ResultSet;
 import java.util.Date;
 
 import com.jdc.db.Entity;
@@ -24,12 +25,44 @@ public class Employee implements Entity{
 			
 			for(Field f : fields) {
 				f.setAccessible(true);
+				Object obj = f.get(this);
+				
+				if(f.getName().equals("dob") || f.getName().equals("employed_date")) {
+					Date date = (Date)obj;
+					p.put(f.getName(), getDate(date));
+				} else {
+					p.put(f.getName(), obj);
+				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
 		return p;
+	}
+	
+	public static Employee convert(ResultSet rs) {
+		Employee emp = null;
+		
+		try {
+			emp = new Employee();
+			
+			for(Field f : Employee.class.getDeclaredFields()) {
+				f.setAccessible(true);
+				Object obj = rs.getObject(f.getName());
+				if(f.getName().equals("dob") || f.getName().equals("employed_date")) {
+					f.set(emp, Entity.getJavaDate((java.sql.Date)obj));
+				} else {
+					f.set(emp, obj);
+				}
+				
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return emp;
 	}
 	
 	private String emp_cd;
