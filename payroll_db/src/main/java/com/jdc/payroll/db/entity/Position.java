@@ -2,8 +2,6 @@ package com.jdc.payroll.db.entity;
 
 import java.sql.ResultSet;
 
-import javax.naming.spi.DirStateFactory.Result;
-
 import com.jdc.db.Entity;
 import com.jdc.db.Param;
 
