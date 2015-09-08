@@ -26,7 +26,8 @@ public class Request implements Entity {
 			r.setType(rs.getString("type"));
 
 		} catch (Exception e) {
-
+			
+			
 		}
 		return r;
 
