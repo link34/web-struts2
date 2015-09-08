@@ -2,7 +2,24 @@ package com.jdc.payroll.db.entity;
 
 import java.util.Date;
 
-public class Claendar {
+import com.jdc.db.Entity;
+import com.jdc.db.Param;
+
+public class Claendar implements Entity {
+	
+	@Override
+	public Param getIdParam() {
+		return Param.getInstance()
+				.put("holiday", holiday)
+				.put("holiday_type", holiday_type)
+				.put("description", description);
+	}
+	@Override
+	public Param getInsertParams() {
+		return Param.getInstance().put("id", id);
+	}
+
+
 	private int id;
 	private Date holiday;
 	private String holiday_type;
@@ -31,5 +48,4 @@ public class Claendar {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-
 }
