@@ -1,0 +1,4 @@
+id         , int(11)     
+emp_cd     , varchar(10) 
+start_date , date        
+valid_flag , varchar(1)  
