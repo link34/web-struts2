@@ -1,6 +1,39 @@
 package com.jdc.payroll.db.entity;
 
-public class Leave {
+import java.sql.ResultSet;
+
+import com.jdc.db.Entity;
+import com.jdc.db.Param;
+
+public class Leave implements Entity{
+	
+	@Override
+	public Param getIdParam() {
+		return Param.getInstance().put("id", id);
+	}
+	@Override
+	public Param getInsertParams() {
+		return Param.getInstance()
+				.put("leave_type",leave_type )
+				.put("leave_days",leave_days )
+				.put("description",description );
+	}
+	
+	public static Leave convert(ResultSet rs)
+	{
+		Leave l=null;
+		try {
+			
+			l=new Leave();
+			l.setLeave_type(rs.getString("leave_type"));
+			l.setLeave_days(rs.getFloat("leave_days"));
+			l.setDescription(rs.getString("description"));
+			
+		} catch (Exception e) {
+			
+		}
+		return l;
+	}
 	private int id;
 	private String leave_type;
 	private float leave_days;
@@ -29,4 +62,5 @@ public class Leave {
 	public void setDescription(String description) {
 		this.description = description;
 	}
+	
 }

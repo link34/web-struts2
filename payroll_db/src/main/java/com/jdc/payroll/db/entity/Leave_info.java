@@ -1,8 +1,14 @@
 package com.jdc.payroll.db.entity;
 
+import java.sql.ResultSet;
 import java.util.Date;
 
+import com.jdc.db.Entity;
+import com.jdc.db.Param;
+
 public class Leave_info {
+	
+	
 	private int id;
 	private Date leave_date;
 	private String emp_cd;
@@ -48,5 +54,7 @@ public class Leave_info {
 	public void setRemark(String remark) {
 		this.remark = remark;
 	}
+
+	
 
 }

@@ -1,6 +1,36 @@
 package com.jdc.payroll.db.entity;
 
-public class Position {
+import java.sql.ResultSet;
+
+import javax.naming.spi.DirStateFactory.Result;
+
+import com.jdc.db.Entity;
+import com.jdc.db.Param;
+
+public class Position implements Entity{
+	
+	@Override
+	public Param getIdParam() {
+		return Param.getInstance().put("position_cd",position_cd );
+	}
+
+	@Override
+	public Param getInsertParams() {
+		return Param.getInstance()
+				.put("description", description);
+	}
+	
+	public static Position convert(ResultSet rs){
+		Position p=null;
+		try {
+			p=new Position();
+			p.setDescription(rs.getString("description"));
+			
+		} catch (Exception e) {
+			
+		}
+		return p;
+	}
 	private String position_cd;
 	private String description;
 
@@ -19,4 +49,6 @@ public class Position {
 	public void setDescription(String description) {
 		this.description = description;
 	}
+
+	
 }
