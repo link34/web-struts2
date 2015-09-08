@@ -6,6 +6,7 @@ import java.util.Date;
 
 import com.jdc.db.Entity;
 import com.jdc.db.Param;
+import com.jdc.payroll.db.common.PayrollDBException;
 
 public class Attandance implements Entity {
 
@@ -31,7 +32,7 @@ public class Attandance implements Entity {
 			a.setId(rs.getInt("id"));
 			a.setStart_time(Entity.getJavaDate(rs.getTimestamp("start_time")));
 		} catch (SQLException e) {
-
+			throw new PayrollDBException(e);
 		}
 		return a;
 	}
