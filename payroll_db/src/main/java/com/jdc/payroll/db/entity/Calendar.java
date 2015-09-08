@@ -5,7 +5,7 @@ import java.util.Date;
 import com.jdc.db.Entity;
 import com.jdc.db.Param;
 
-public class Claendar implements Entity {
+public class Calendar implements Entity {
 	
 	@Override
 	public Param getIdParam() {
