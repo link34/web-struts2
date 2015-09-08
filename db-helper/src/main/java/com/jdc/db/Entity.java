@@ -8,18 +8,26 @@ public interface Entity {
 	Param getInsertParams();
 	
 	public default Date getDate(java.util.Date date) {
-		return new Date(date.getTime());
+		if(null != date)
+			return new Date(date.getTime());
+		return null;
 	}
 	
 	public default Timestamp getTimeStamp(java.util.Date date) {
-		return new Timestamp(date.getTime());
+		if(null != date)
+			return new Timestamp(date.getTime());
+		return null;
 	}
 	
 	public static java.util.Date getJavaDate(Date date) {
-		return new java.util.Date(date.getTime());
+		if(null != date)
+			return new java.util.Date(date.getTime());
+		return null;
 	}
 	
 	public static java.util.Date getJavaDate(Timestamp date) {
-		return new java.util.Date(date.getTime());
+		if(null != date)
+			return new java.util.Date(date.getTime());
+		return null;
 	}
 }

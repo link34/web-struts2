@@ -2,7 +2,10 @@ package com.jdc.payroll.db.entity;
 
 import java.util.Date;
 
-public class Salary {
+import com.jdc.db.GeneratedEntity;
+import com.jdc.db.Param;
+
+public class Salary implements GeneratedEntity{
 	private int id;
 	private String emp_cd;
 	private String position_cd;
@@ -65,5 +68,17 @@ public class Salary {
 
 	public void setEnd_date(Date end_date) {
 		this.end_date = end_date;
+	}
+
+	@Override
+	public Param getIdParam() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Param getInsertParams() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

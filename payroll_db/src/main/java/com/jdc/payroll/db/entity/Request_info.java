@@ -2,7 +2,10 @@ package com.jdc.payroll.db.entity;
 
 import java.util.Date;
 
-public class Request_info {
+import com.jdc.db.GeneratedEntity;
+import com.jdc.db.Param;
+
+public class Request_info implements GeneratedEntity{
 	private int id;
 	private Date req_date;
 	private String emp_cd;
@@ -74,5 +77,17 @@ public class Request_info {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	@Override
+	public Param getIdParam() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Param getInsertParams() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

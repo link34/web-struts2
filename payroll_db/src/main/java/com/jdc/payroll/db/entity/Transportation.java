@@ -2,7 +2,10 @@ package com.jdc.payroll.db.entity;
 
 import java.util.Date;
 
-public class Transportation {
+import com.jdc.db.GeneratedEntity;
+import com.jdc.db.Param;
+
+public class Transportation implements GeneratedEntity{
 	private int id;
 	private String emp_cd;
 	private Date start_date;
@@ -38,5 +41,17 @@ public class Transportation {
 
 	public void setValid_flag(String valid_flag) {
 		this.valid_flag = valid_flag;
+	}
+
+	@Override
+	public Param getIdParam() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Param getInsertParams() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

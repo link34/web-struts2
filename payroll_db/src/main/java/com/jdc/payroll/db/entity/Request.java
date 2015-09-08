@@ -2,10 +2,10 @@ package com.jdc.payroll.db.entity;
 
 import java.sql.ResultSet;
 
-import com.jdc.db.Entity;
+import com.jdc.db.GeneratedEntity;
 import com.jdc.db.Param;
 
-public class Request implements Entity {
+public class Request implements GeneratedEntity {
 
 	@Override
 	public Param getIdParam() {

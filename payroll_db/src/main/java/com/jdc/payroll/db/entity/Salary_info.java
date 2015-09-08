@@ -1,6 +1,9 @@
 package com.jdc.payroll.db.entity;
 
-public class Salary_info {
+import com.jdc.db.GeneratedEntity;
+import com.jdc.db.Param;
+
+public class Salary_info implements GeneratedEntity{
 	private int id;
 	private String emp_cd;
 	private String base_month;
@@ -54,5 +57,17 @@ public class Salary_info {
 
 	public void setRemark(String remark) {
 		this.remark = remark;
+	}
+
+	@Override
+	public Param getIdParam() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Param getInsertParams() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

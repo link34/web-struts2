@@ -20,7 +20,7 @@ public class BaseModel<T extends Entity> implements Model<T>{
 	private Function<ResultSet, T> converter;
 	private DataSource ds;
 	
-	public BaseModel(Class<T> entity, Function<ResultSet, T> converter) {
+	BaseModel(Class<T> entity, Function<ResultSet, T> converter) {
 		this.entity = entity;
 		this.converter = converter;
 		props = new Properties();
@@ -31,7 +31,7 @@ public class BaseModel<T extends Entity> implements Model<T>{
 		}
 	}
 
-	public BaseModel(Class<T> entity, Function<ResultSet, T> converter, DataSource ds, InputStream configuration) {
+	BaseModel(Class<T> entity, Function<ResultSet, T> converter, DataSource ds, InputStream configuration) {
 		this.ds = ds;
 		this.entity = entity;
 		this.converter = converter;
@@ -81,6 +81,11 @@ public class BaseModel<T extends Entity> implements Model<T>{
 			}
 			
 			stmt.executeUpdate();
+
+			if(t instanceof GeneratedEntity) {
+				ResultSet rs = stmt.getGeneratedKeys();
+				((GeneratedEntity)t).setId(rs.getInt(1));
+			}
 			
 		} catch (SQLException e) {
 			e.printStackTrace();

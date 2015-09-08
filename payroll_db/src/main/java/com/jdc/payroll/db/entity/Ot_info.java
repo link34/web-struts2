@@ -2,7 +2,10 @@ package com.jdc.payroll.db.entity;
 
 import java.util.Date;
 
-public class Ot_info {
+import com.jdc.db.GeneratedEntity;
+import com.jdc.db.Param;
+
+public class Ot_info implements GeneratedEntity{
 	private int id;
 	private Date date;
 	private String emp_cd;
@@ -65,5 +68,17 @@ public class Ot_info {
 
 	public void setConfirm_flag(int confirm_flag) {
 		this.confirm_flag = confirm_flag;
+	}
+
+	@Override
+	public Param getIdParam() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Param getInsertParams() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

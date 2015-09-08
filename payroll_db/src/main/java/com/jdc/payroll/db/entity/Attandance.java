@@ -5,10 +5,11 @@ import java.sql.SQLException;
 import java.util.Date;
 
 import com.jdc.db.Entity;
+import com.jdc.db.GeneratedEntity;
 import com.jdc.db.Param;
 import com.jdc.payroll.db.common.PayrollDBException;
 
-public class Attandance implements Entity {
+public class Attandance implements GeneratedEntity {
 
 	@Override
 	public Param getInsertParams() {

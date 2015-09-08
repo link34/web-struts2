@@ -2,10 +2,10 @@ package com.jdc.payroll.db.entity;
 
 import java.sql.ResultSet;
 
-import com.jdc.db.Entity;
+import com.jdc.db.GeneratedEntity;
 import com.jdc.db.Param;
 
-public class Leave implements Entity{
+public class Leave implements GeneratedEntity{
 	
 	@Override
 	public Param getIdParam() {
