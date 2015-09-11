@@ -2,7 +2,10 @@ package com.jdc.payroll.db.entity;
 
 import java.util.Date;
 
-public class Leave_info {
+import com.jdc.db.GeneratedEntity;
+import com.jdc.db.Param;
+
+public class Leave_info implements GeneratedEntity{
 	
 	
 	private int id;
@@ -15,6 +18,7 @@ public class Leave_info {
 		return id;
 	}
 
+	@Override
 	public void setId(int id) {
 		this.id = id;
 	}
@@ -49,6 +53,18 @@ public class Leave_info {
 
 	public void setRemark(String remark) {
 		this.remark = remark;
+	}
+
+	@Override
+	public Param getIdParam() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Param getInsertParams() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	
