@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -72,7 +73,7 @@ public class BaseModel<T extends Entity> implements Model<T>{
 				t.getInsertParams().getInsertString());
 		
 		try(Connection conn = getConnection();
-				PreparedStatement stmt = conn.prepareStatement(sql)) {
+				PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 			
 			List<Object> params = t.getInsertParams().getValues();
 			
@@ -83,9 +84,10 @@ public class BaseModel<T extends Entity> implements Model<T>{
 			stmt.executeUpdate();
 
 			if(t instanceof GeneratedEntity) {
+
 				ResultSet rs = stmt.getGeneratedKeys();
 				((GeneratedEntity)t).setId(rs.getInt(1));
-			}
+			} 
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
