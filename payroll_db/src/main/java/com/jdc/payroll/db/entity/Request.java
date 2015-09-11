@@ -17,7 +17,7 @@ public class Request implements GeneratedEntity {
 		return Param.getInstance().put("id", id);
 	}
 
-	public static Request convery(ResultSet rs) {
+	public static Request convert(ResultSet rs) {
 		Request r = null;
 		try {
 			r = new Request();

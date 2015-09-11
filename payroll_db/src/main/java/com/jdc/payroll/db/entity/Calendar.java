@@ -4,9 +4,10 @@ import java.sql.ResultSet;
 import java.util.Date;
 
 import com.jdc.db.Entity;
+import com.jdc.db.GeneratedEntity;
 import com.jdc.db.Param;
 
-public class Calendar implements Entity {
+public class Calendar implements GeneratedEntity {
 
 	@Override
 	public Param getIdParam() {
