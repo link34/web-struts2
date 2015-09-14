@@ -86,6 +86,7 @@ public class BaseModel<T extends Entity> implements Model<T>{
 			if(t instanceof GeneratedEntity) {
 
 				ResultSet rs = stmt.getGeneratedKeys();
+				rs.next();
 				((GeneratedEntity)t).setId(rs.getInt(1));
 			} 
 			
