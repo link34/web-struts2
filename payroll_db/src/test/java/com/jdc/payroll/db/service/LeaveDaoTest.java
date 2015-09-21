@@ -8,6 +8,7 @@ import java.util.List;
 
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.jdc.db.DbHelper;
@@ -61,6 +62,7 @@ public class LeaveDaoTest {
 		assertEquals(1, list.size());
 	}
 	
+	@Ignore
 	@Test
 	public void test5(){
 		model.delete("id = ?", Arrays.asList("1"));

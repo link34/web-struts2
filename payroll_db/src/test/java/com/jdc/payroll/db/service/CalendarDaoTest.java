@@ -6,6 +6,7 @@ import java.util.Date;
 
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.jdc.db.DbHelper;
@@ -27,6 +28,7 @@ public class CalendarDaoTest {
 		model = Model.getModel(Calendar.class, Calendar::convert);
 	}
 
+	@Ignore
 	@Test
 	public void test1() throws ParseException {
 		Calendar e = new Calendar();
