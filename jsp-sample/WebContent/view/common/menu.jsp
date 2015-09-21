@@ -7,7 +7,7 @@
 </head>
 <body>
 
-	<nav class="navbar navbar-inverse navbar-fixed-top">
+	<nav class="navbar navbar-inverse">
 		<div class="container">
 			<div class="navbar-header">
 				<button type="button" class="navbar-toggle collapsed"
@@ -41,7 +41,7 @@
 			          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Master Data <span class="caret"></span></a>
 			          <ul class="dropdown-menu">
 			            <li><a href="#">Calendar</a></li>
-			            <li><a href="#">Position</a></li>
+			            <li><a href="/jsp-sample/position-index">Position</a></li>
 			            <li><a href="#">Leaves</a></li>
 			            <li><a href="#">Request</a></li>
 			          </ul>
