@@ -13,20 +13,22 @@ import javax.sql.DataSource;
 import com.jdc.db.Model;
 import com.jdc.payroll.db.entity.Request;
 
-@WebServlet({ "/request-add", "/request-save", "/request-edit",
-		"/request-index" })
+@WebServlet({ "/request-add", 
+	"/request-save", 
+	"/request-edit",
+	"/request-index" })
 public class RequestServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	@Resource(name = "jdbc/payroll")
 	private DataSource ds;
-	private Model<Request> RequestModel;
+	private Model<Request> requestModel;
 
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		this.initResource();
 
-		request.setAttribute("list", RequestModel.getAll());
+		request.setAttribute("list", requestModel.getAll());
 		request.getRequestDispatcher("/view/master/request.jsp").forward(
 				request, response);
 	}
@@ -46,7 +48,7 @@ public class RequestServlet extends HttpServlet {
 			r.setName(reqname);
 			r.setType(reqtype);
 
-			RequestModel.create(r);
+			requestModel.create(r);
 
 			break;
 
@@ -58,7 +60,7 @@ public class RequestServlet extends HttpServlet {
 			break;
 		}
 
-		request.setAttribute("list", RequestModel.getAll());
+		request.setAttribute("list", requestModel.getAll());
 		request.getRequestDispatcher("/view/master/request.jsp").forward(
 				request, response);
 	}
@@ -66,7 +68,7 @@ public class RequestServlet extends HttpServlet {
 	private void initResource() {
 		InputStream dbConfig = getServletContext().getResourceAsStream(
 				"/WEB-INF/database.properties");
-		RequestModel = Model.getModel(Request.class, Request::convert, ds,
+		requestModel = Model.getModel(Request.class, Request::convert, ds,
 				dbConfig);
 	}
 
