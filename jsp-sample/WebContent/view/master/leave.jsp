@@ -25,14 +25,8 @@
 			</div>
 
 
-			<form class="form-horizontal jumbotron" method="post" action="/jsp-sample/position-add">
-				<div class="form-group hidden">
-						<label for="id" class="col-sm-5 control-label">ID</label>
-						<div class="col-sm-7">
-							<input type="text" class="form-control" id="id" name="id"
-								placeholder="ID">
-						</div>
-				</div>
+			<form class="form-horizontal jumbotron" method="post" action="/jsp-sample/leave-add">
+		
 				<div class="form-group">
 					<label for="leave_type" class="col-sm-5 control-label">Leave Type</label>
 					<div class="col-sm-7">
@@ -69,10 +63,10 @@
 			<hr/>
 		<div class="col-md-offset-2 col-md-8">
 			
-			<%-- <%
-				List<Position> list = (List<Position>)request.getAttribute("list");
+			<%
+				List<Leave> list = (List<Leave>)request.getAttribute("list");
 				if(null != list) {
-			%> --%>
+			%>
 			
 			<table class="table table-striped table-bordered">
 				<tr>
@@ -84,27 +78,27 @@
 					<th>Delete</th>
 				</tr>
 				
-				<%-- <% for(Position p : list) { %> --%>
+				<% for(Leave l : list) { %>
 				<tr>
-					<td></td>
-					<td></td>
+					<td><%= l.getLeave_type() %></td>
+					<td><%= l.getLeave_days() %></td>
 					<td></td>
 					<td></td>
 					<td><a href="#"><i class="glyphicon glyphicon-pencil"></i></a></td>
 					<td><a href="#"><i class="glyphicon glyphicon-trash"></i></a></td>
 				</tr>
 				
-				<%-- <% } %> --%>
+				<% } %>
 
 			</table>
 			
-			<%-- <%
+			<%
 				} else {
 			%>
 				No data
 			<%
 				}
-			%> --%>
+			%>
 		</div>
 
 	<script src="/jsp-sample/resources/js/jquery-2.1.3.min.js"></script>
