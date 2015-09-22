@@ -42,7 +42,7 @@
 			          <ul class="dropdown-menu">
 			            <li><a href="#">Calendar</a></li>
 			            <li><a href="/jsp-sample/position-index">Position</a></li>
-			            <li><a href="#">Leaves</a></li>
+			            <li><a href="/jsp-sample/request-index">Leaves</a></li>
 			            <li><a href="#">Request</a></li>
 			          </ul>
 			        </li>
