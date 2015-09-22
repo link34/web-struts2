@@ -14,61 +14,60 @@ import javax.sql.DataSource;
 import com.jdc.db.Model;
 import com.jdc.payroll.db.entity.Leave;
 
-@WebServlet({ 
-			"/leave-add", 
-			"/leave-save", 
-			"/leave-edit", 
-			"/leave-index" })
-
+@WebServlet({ "/leave-add", "/leave-save", "/leave-edit", "/leave-index" })
 public class LeaveServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
-	@Resource(name="jdbc/payroll")
+
+	@Resource(name = "jdbc/payroll")
 	private DataSource ds;
 	private Model<Leave> leaveModel;
 
-	protected void doGet(HttpServletRequest request, 
+	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		this.initResource();
-		
+
 		request.setAttribute("list", leaveModel.getAll());
-		request.getRequestDispatcher("view/masrwe/leave.jsp").forward(request, response);
-		
+		request.getRequestDispatcher("view/master/leave.jsp").forward(request,
+				response);
+
 	}
 
-	protected void doPost(HttpServletRequest request, 
+	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		this.initResource();
-		
+
 		String leave_type = request.getParameter("leave_type");
 		String leave_days = request.getParameter("leave_days");
 		String description = request.getParameter("description");
-		
+
 		switch (request.getServletPath()) {
 		case "/leave-add":
-			
+
 			Leave l = new Leave();
 			l.setLeave_type(leave_type);
-			l.setLeave_days(Float.parseFloat(leave_days)); // Conver String to Float
+			l.setLeave_days(Float.parseFloat(leave_days)); // Conver String to
+															// Float
 			l.setDescription(description);
-			
+
 			leaveModel.create(l);
-		
+
 		case "/leave-save":
-			
+
 			break;
 
 		default:
 			break;
 		}
-		
+
 		request.setAttribute("list", leaveModel.getAll());
-		request.getRequestDispatcher("/view/master/position.jsp").forward(request, response);
-		
-		}
-	
+		request.getRequestDispatcher("/view/master/leave.jsp").forward(
+				request, response);
+
+	}
+
 	private void initResource() {
-		InputStream dbConfig = getServletContext().getResourceAsStream("/WEB-INF/database.properties");
+		InputStream dbConfig = getServletContext().getResourceAsStream(
+				"/WEB-INF/database.properties");
 		leaveModel = Model.getModel(Leave.class, Leave::convert, ds, dbConfig);
 	}
 

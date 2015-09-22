@@ -1,11 +1,9 @@
-<%@page import="com.jdc.payroll.db.entity.Position"%>
+<%@page import="com.jdc.payroll.db.entity.Leave"%>
 <%@page import="java.util.List"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8">
 <title>Leave Management</title>
 
 <link href="/jsp-sample/resources/css/bootstrap.min.css"
@@ -37,7 +35,7 @@
 				<div class="form-group">
 					<label for="leave_days" class="col-sm-5 control-label">Leave Days</label>
 					<div class="col-sm-7">
-						<input type="text" class="form-control" id="leave_days" name="leave_days"
+						<input type="number" class="form-control" id="leave_days" name="leave_days"
 							placeholder="Leave Days">
 					</div>
 				</div>
@@ -70,7 +68,6 @@
 			
 			<table class="table table-striped table-bordered">
 				<tr>
-					<th>ID</th>
 					<th>Leave Type</th>
 					<th>Leave Days</th>
 					<th>Description</th>
@@ -82,8 +79,7 @@
 				<tr>
 					<td><%= l.getLeave_type() %></td>
 					<td><%= l.getLeave_days() %></td>
-					<td></td>
-					<td></td>
+					<td><%= l.getDescription() %></td>
 					<td><a href="#"><i class="glyphicon glyphicon-pencil"></i></a></td>
 					<td><a href="#"><i class="glyphicon glyphicon-trash"></i></a></td>
 				</tr>
