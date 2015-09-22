@@ -9,12 +9,12 @@ public class Request implements GeneratedEntity {
 
 	@Override
 	public Param getIdParam() {
-		return Param.getInstance().put("name", name).put("type", type);
+		return Param.getInstance().put("id", id);
 	}
 
 	@Override
 	public Param getInsertParams() {
-		return Param.getInstance().put("id", id);
+		return Param.getInstance().put("name", name).put("type", type);
 	}
 
 	public static Request convert(ResultSet rs) {
