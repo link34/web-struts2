@@ -1,0 +1,114 @@
+<%@page import="com.jdc.payroll.db.entity.Position"%>
+<%@page import="java.util.List"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Leave Management</title>
+
+<link href="/jsp-sample/resources/css/bootstrap.min.css"
+	rel="stylesheet">
+<link href="/jsp-sample/resources/css/common.css" rel="stylesheet">
+</head>
+<body>
+
+	<jsp:include page="/view/common/menu.jsp"></jsp:include>
+
+	<div class="container col-md-offset-4 col-md-4">
+
+		<div class="base-panel">
+		
+			<div class="page-header">
+				<h1>Leave Management</h1>
+			</div>
+
+
+			<form class="form-horizontal jumbotron" method="post" action="/jsp-sample/position-add">
+				<div class="form-group hidden">
+						<label for="id" class="col-sm-5 control-label">ID</label>
+						<div class="col-sm-7">
+							<input type="text" class="form-control" id="id" name="id"
+								placeholder="ID">
+						</div>
+				</div>
+				<div class="form-group">
+					<label for="leave_type" class="col-sm-5 control-label">Leave Type</label>
+					<div class="col-sm-7">
+						<input type="text" class="form-control" id="leave_type" name="leave_type"
+							placeholder="Leave Type">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="leave_days" class="col-sm-5 control-label">Leave Days</label>
+					<div class="col-sm-7">
+						<input type="text" class="form-control" id="leave_days" name="leave_days"
+							placeholder="Leave Days">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="description" class="col-sm-5 control-label">Description</label>
+					<div class="col-sm-7">
+						<textarea name="description" class="form-control" id="description" rows="4" cols="20"></textarea>
+					</div>
+				</div>
+		
+				<div class="form-group">
+					<div class="col-sm-offset-5	 col-sm-7">
+						<button type="reset" class="btn btn-default">Clear</button>
+						<button type="submit" class="btn btn-primary">Save</button>
+					</div>
+				</div>
+				
+			</form>
+			
+		</div>
+	</div>
+			
+			<hr/>
+		<div class="col-md-offset-2 col-md-8">
+			
+			<%-- <%
+				List<Position> list = (List<Position>)request.getAttribute("list");
+				if(null != list) {
+			%> --%>
+			
+			<table class="table table-striped table-bordered">
+				<tr>
+					<th>ID</th>
+					<th>Leave Type</th>
+					<th>Leave Days</th>
+					<th>Description</th>
+					<th>Edit</th>
+					<th>Delete</th>
+				</tr>
+				
+				<%-- <% for(Position p : list) { %> --%>
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td><a href="#"><i class="glyphicon glyphicon-pencil"></i></a></td>
+					<td><a href="#"><i class="glyphicon glyphicon-trash"></i></a></td>
+				</tr>
+				
+				<%-- <% } %> --%>
+
+			</table>
+			
+			<%-- <%
+				} else {
+			%>
+				No data
+			<%
+				}
+			%> --%>
+		</div>
+
+	<script src="/jsp-sample/resources/js/jquery-2.1.3.min.js"></script>
+	<script src="/jsp-sample/resources/js/bootstrap.min.js"></script>
+
+</body>
+</html>
