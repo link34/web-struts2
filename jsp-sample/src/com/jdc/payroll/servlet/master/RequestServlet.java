@@ -16,6 +16,7 @@ import com.jdc.payroll.db.entity.Request;
 @WebServlet({ "/request-add", 
 	"/request-save", 
 	"/request-edit",
+	"/request-delete",
 	"/request-index" })
 public class RequestServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -27,7 +28,7 @@ public class RequestServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		this.initResource();
-
+		
 		request.setAttribute("list", requestModel.getAll());
 		request.getRequestDispatcher("/view/master/request.jsp").forward(
 				request, response);

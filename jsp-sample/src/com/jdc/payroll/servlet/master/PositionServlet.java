@@ -2,6 +2,7 @@ package com.jdc.payroll.servlet.master;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Arrays;
 
 import javax.annotation.Resource;
 import javax.servlet.ServletException;
@@ -12,12 +13,14 @@ import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
 import com.jdc.db.Model;
+import com.jdc.db.Param;
 import com.jdc.payroll.db.entity.Position;
 
 @WebServlet({ 
 		"/position-add", 
 		"/position-save",
 		"/position-edit", 
+		"/position-delete", 
 		"/position-index" })
 public class PositionServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -29,9 +32,30 @@ public class PositionServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		this.initResource();
+
+		String pCode = request.getParameter("id");
+		String jsp = "/view/master/position.jsp";
 		
-		request.setAttribute("list", positionModel.getAll());
-		request.getRequestDispatcher("/view/master/position.jsp").forward(request, response);
+		switch (request.getServletPath()) {
+		case "/position-edit":
+			
+			Position position = positionModel.findById(Param.getInstance().put("position_cd", pCode));
+			request.setAttribute("position", position);
+			jsp = "/view/master/position-edit.jsp";
+			break;
+
+		case "/position-delete":
+			
+			positionModel.delete("position_cd = ?", Arrays.asList(pCode));
+			request.setAttribute("list", positionModel.getAll());
+			break;
+
+		default:
+			request.setAttribute("list", positionModel.getAll());
+			break;
+		}		
+
+		request.getRequestDispatcher(jsp).forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request,
