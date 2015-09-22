@@ -1,9 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8">
 </head>
 <body>
 
@@ -42,8 +40,8 @@
 			          <ul class="dropdown-menu">
 			            <li><a href="#">Calendar</a></li>
 			            <li><a href="/jsp-sample/position-index">Position</a></li>
-			            <li><a href="/jsp-sample/request-index">Leaves</a></li>
-			            <li><a href="#">Request</a></li>
+			            <li><a href="/jsp-sample/leave-index">Leaves</a></li>
+			            <li><a href="/jsp-sample/request-index">Request</a></li>
 			          </ul>
 			        </li>
 
