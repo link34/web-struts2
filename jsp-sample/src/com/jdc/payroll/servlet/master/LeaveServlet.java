@@ -2,6 +2,7 @@ package com.jdc.payroll.servlet.master;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Arrays;
 
 import javax.annotation.Resource;
 import javax.servlet.ServletException;
@@ -12,9 +13,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
 import com.jdc.db.Model;
+import com.jdc.db.Param;
 import com.jdc.payroll.db.entity.Leave;
 
-@WebServlet({ "/leave-add", "/leave-save", "/leave-edit", "/leave-index" })
+@WebServlet({ "/leave-add", "/leave-save", "/leave-edit", "/leave-delete",
+		"/leave-index" })
 public class LeaveServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -26,9 +29,28 @@ public class LeaveServlet extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		this.initResource();
 
-		request.setAttribute("list", leaveModel.getAll());
-		request.getRequestDispatcher("view/master/leave.jsp").forward(request,
-				response);
+		String id = request.getParameter("id");
+		String jsp = "/view/master/leave.jsp";
+
+		switch (request.getServletPath()) {
+		case "/leave-edit":
+			Leave leave = leaveModel
+					.findById(Param.getInstance().put("id", id));
+			request.setAttribute("leave", leave);
+			jsp = "/view/master/leave-edit.jsp";
+			break;
+
+		case "leave-delete":
+			leaveModel.delete("id = ?", Arrays.asList(id));
+			request.setAttribute("id", leaveModel.getAll());
+			break;
+
+		default:
+			request.setAttribute("list", leaveModel.getAll());
+			break;
+		}
+
+		request.getRequestDispatcher(jsp).forward(request, response);
 
 	}
 
@@ -36,6 +58,7 @@ public class LeaveServlet extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		this.initResource();
 
+		String id = request.getParameter("id");
 		String leave_type = request.getParameter("leave_type");
 		String leave_days = request.getParameter("leave_days");
 		String description = request.getParameter("description");
@@ -52,7 +75,11 @@ public class LeaveServlet extends HttpServlet {
 			leaveModel.create(l);
 
 		case "/leave-save":
-
+			leaveModel.update(
+					"leave_type=?, leave_days=?, description=?",
+					"id = ? ",
+					Arrays.asList(leave_type, leave_days, description,
+							Integer.parseInt(id)));
 			break;
 
 		default:
@@ -60,8 +87,8 @@ public class LeaveServlet extends HttpServlet {
 		}
 
 		request.setAttribute("list", leaveModel.getAll());
-		request.getRequestDispatcher("/view/master/leave.jsp").forward(
-				request, response);
+		request.getRequestDispatcher("/view/master/leave.jsp").forward(request,
+				response);
 
 	}
 
