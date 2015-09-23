@@ -19,7 +19,7 @@
 
 		<div class="base-panel">
 			<div class="page-header">
-				<h1>Edit Position</h1>
+				<h1>Edit Request</h1>
 			</div>
 
 			<%
@@ -27,18 +27,18 @@
 			%>
 
 			<form class="form-horizontal" method="post" action="/jsp-sample/request-save">
-				<input type="hidden" name="reqname" value="<%=q.getId() %>" />
+				<input type="hidden" name="id" value="<%=q.getId() %>" />
 				<div class="form-group">
 					<label for="inputEmail3" class="col-sm-2 control-label">Request Name</label>
 					<div class="col-sm-10">
-						<input type="date" class="form-control" id="inputEmail3" name="reqname"
-							placeholder="Request Name " disabled="disabled" value="<%=q.getName() %>">
+						<input type="text" class="form-control" id="inputEmail3" name="name"
+							placeholder="Request Name " value="<%=q.getName() %>">
 					</div>
 				</div>
 				<div class="form-group">
 					<label for="inputPassword3" class="col-sm-2 control-label">Request Type</label>
 					<div class="col-sm-10">
-						<textarea name="reqtype" class="form-control" rows="4" cols="20"><%=q.getType() %></textarea>
+						<textarea name="type" class="form-control" rows="4" cols="20"><%=q.getType() %></textarea>
 					</div>
 				</div>
 		
