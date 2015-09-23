@@ -63,8 +63,8 @@
 				<tr>
 					<td><%= r.getName() %></td>
 					<td><%= r.getType() %></td>
-					<td><a href="#"><i class="glyphicon glyphicon-pencil"></i></a></td>
-					<td><a href="#"><i class="glyphicon glyphicon-trash"></i></a></td>
+					<td><a href="/jsp-sample/request-edit?id=<%= r.getId() %>"><i class="glyphicon glyphicon-pencil"></i></a></td>
+					<td><a href="/jsp-sample/request-edit?id=<%= r.getId() %>"><i class="glyphicon glyphicon-trash"></i></a></td>
 				</tr>
 				
 				<% } %>

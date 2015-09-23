@@ -2,6 +2,8 @@ package com.jdc.payroll.servlet.master;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Arrays;
+
 import javax.annotation.Resource;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,6 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
 import com.jdc.db.Model;
+import com.jdc.db.Param;
+import com.jdc.payroll.db.entity.Position;
 import com.jdc.payroll.db.entity.Request;
 
 @WebServlet({ "/request-add", 
@@ -29,9 +33,35 @@ public class RequestServlet extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		this.initResource();
 		
+		
+		String qCode = request.getParameter("id");
+		String jsp = "/view/master/request.jsp";
+		
+		switch (request.getServletPath()) {
+		case "/request-edit":
+			
+			Request req = requestModel.findById(Param.getInstance().put("id", qCode));
+			request.setAttribute("request", req);
+			jsp = "/view/master/request-edit.jsp";
+			break;
+
+		case "/request-delete":
+			
+			requestModel.delete("name = ?", Arrays.asList(qCode));
+			requestModel.delete("type = ?", Arrays.asList(qCode));
+			request.setAttribute("list", requestModel.getAll());
+			break;
+
+		default:
+			request.setAttribute("list", requestModel.getAll());
+			break;
+		}		
+
+		
 		request.setAttribute("list", requestModel.getAll());
 		request.getRequestDispatcher("/view/master/request.jsp").forward(
 				request, response);
+		
 	}
 
 	protected void doPost(HttpServletRequest request,
@@ -54,7 +84,8 @@ public class RequestServlet extends HttpServlet {
 			break;
 
 		case "/request-save":
-
+			requestModel.update("name=?", "id=?", Arrays.asList(reqname, id));
+			requestModel.update("type=?", "id=?", Arrays.asList(reqtype, id));
 			break;
 
 		default:
@@ -71,6 +102,8 @@ public class RequestServlet extends HttpServlet {
 				"/WEB-INF/database.properties");
 		requestModel = Model.getModel(Request.class, Request::convert, ds,
 				dbConfig);
+		
+		
 	}
 
 }
