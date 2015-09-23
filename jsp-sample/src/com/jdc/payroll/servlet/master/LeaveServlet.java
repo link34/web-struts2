@@ -16,8 +16,12 @@ import com.jdc.db.Model;
 import com.jdc.db.Param;
 import com.jdc.payroll.db.entity.Leave;
 
-@WebServlet({ "/leave-add", "/leave-save", "/leave-edit", "/leave-delete",
-		"/leave-index" })
+@WebServlet({ 
+	"/leave-add", 
+	"/leave-save", 
+	"/leave-edit", 
+	"/leave-delete",
+	"/leave-index" })
 public class LeaveServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -35,13 +39,13 @@ public class LeaveServlet extends HttpServlet {
 		switch (request.getServletPath()) {
 		case "/leave-edit":
 			Leave leave = leaveModel
-					.findById(Param.getInstance().put("id", id));
+					.findById(Param.getInstance().put("id", Integer.parseInt(id)));
 			request.setAttribute("leave", leave);
 			jsp = "/view/master/leave-edit.jsp";
 			break;
 
-		case "leave-delete":
-			leaveModel.delete("id = ?", Arrays.asList(id));
+		case "/leave-delete":
+			leaveModel.delete("id = ?", Arrays.asList(Integer.parseInt(id)));
 			request.setAttribute("id", leaveModel.getAll());
 			break;
 
@@ -58,7 +62,6 @@ public class LeaveServlet extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		this.initResource();
 
-		String id = request.getParameter("id");
 		String leave_type = request.getParameter("leave_type");
 		String leave_days = request.getParameter("leave_days");
 		String description = request.getParameter("description");
@@ -73,8 +76,9 @@ public class LeaveServlet extends HttpServlet {
 			l.setDescription(description);
 
 			leaveModel.create(l);
-
+			break;
 		case "/leave-save":
+			String id = request.getParameter("id");
 			leaveModel.update(
 					"leave_type=?, leave_days=?, description=?",
 					"id = ? ",

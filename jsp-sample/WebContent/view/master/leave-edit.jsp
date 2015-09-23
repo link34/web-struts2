@@ -29,7 +29,7 @@
 			<form class="form-horizontal jumbotron" method="post"
 				action="/jsp-sample/leave-save">
 
-				<input type="hidden" name="postion-code" value="<%=l.getId()%>>" />
+				<input type="hidden" name="id" value="<%=l.getId()%>" />
 
 				<div class="form-group">
 					<label for="leave_type" class="col-sm-5 control-label">Leave

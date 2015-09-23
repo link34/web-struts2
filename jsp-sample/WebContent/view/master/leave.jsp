@@ -80,7 +80,7 @@
 					<td><%= l.getLeave_type() %></td>
 					<td><%= l.getLeave_days() %></td>
 					<td><%= l.getDescription() %></td>
-					<td><a href="/jsp-sample/leave-edit?id=<%= l.getId() %>"><i class="glyphicon glyphicon-pencil"></i></a></td>
+					<td><a href="/jsp-sample/leave-edit?id=<%= l.getId()%>"><i class="glyphicon glyphicon-pencil"></i></a></td>
 					<td><a href="/jsp-sample/leave-delete?id=<%= l.getId() %>"><i class="glyphicon glyphicon-trash"></i></a></td>
 				</tr>
 				

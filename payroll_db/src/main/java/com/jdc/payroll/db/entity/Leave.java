@@ -25,6 +25,7 @@ public class Leave implements GeneratedEntity{
 		try {
 			
 			l=new Leave();
+			l.setId(rs.getInt("id"));
 			l.setLeave_type(rs.getString("leave_type"));
 			l.setLeave_days(rs.getFloat("leave_days"));
 			l.setDescription(rs.getString("description"));
