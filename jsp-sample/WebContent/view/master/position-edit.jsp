@@ -26,6 +26,7 @@
 			%>
 
 			<form class="form-horizontal" method="post" action="/jsp-sample/position-save">
+				<input type="hidden" name="postion-code" value="<%=p.getPosition_cd() %>" />
 				<div class="form-group">
 					<label for="inputEmail3" class="col-sm-2 control-label">Position Code</label>
 					<div class="col-sm-10">

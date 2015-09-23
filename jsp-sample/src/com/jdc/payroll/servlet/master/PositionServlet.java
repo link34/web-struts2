@@ -77,7 +77,7 @@ public class PositionServlet extends HttpServlet {
 			break;
 
 		case "/position-save":
-			
+			positionModel.update("description=?", "position_cd=?", Arrays.asList(description, pCode));
 			break;
 
 		default:
