@@ -1,15 +1,19 @@
 package com.jdc.payroll.servlet.master;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.Arrays;
 
 import javax.annotation.Resource;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 import javax.sql.DataSource;
 
 import com.jdc.db.Model;
@@ -19,9 +23,11 @@ import com.jdc.payroll.db.entity.Position;
 @WebServlet({ 
 		"/position-add", 
 		"/position-save",
+		"/position-upload",
 		"/position-edit", 
 		"/position-delete", 
 		"/position-index" })
+@MultipartConfig
 public class PositionServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
@@ -79,7 +85,32 @@ public class PositionServlet extends HttpServlet {
 		case "/position-save":
 			positionModel.update("description=?", "position_cd=?", Arrays.asList(description, pCode));
 			break;
-
+			
+		case "/position-upload":	
+			Part part = request.getPart("positionFile");
+			if(part != null) {
+				
+				try (InputStream in = part.getInputStream();
+						BufferedReader br = new BufferedReader(new InputStreamReader(in))) {
+					
+					String line = null;
+					
+					while(null != (line = br.readLine())) {
+						
+						String [] strs = line.split("\t");
+						
+						Position posit = new Position();
+						posit.setPosition_cd(strs[0]);
+						posit.setDescription(strs[1]);
+						
+						positionModel.create(posit);
+					}
+					
+				} catch (Exception e) {
+					
+				}
+			}
+			break;
 		default:
 			break;
 		}

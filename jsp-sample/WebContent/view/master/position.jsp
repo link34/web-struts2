@@ -45,6 +45,22 @@
 				</div>
 			</form>
 			
+			<form class="form-horizontal" action="/jsp-sample/position-upload" method="post" enctype="multipart/form-data">
+				<div class="form-group">
+					<label for="inputPassword3" class="col-sm-2 control-label">File Upload</label>
+					<div class="col-sm-10">
+						<input type="file" name="positionFile"/>
+					</div>
+				</div>
+		
+				<div class="form-group">
+					<div class="col-sm-offset-2 col-sm-10">
+						<button type="reset" class="btn btn-default">Clear</button>
+						<button type="submit" class="btn btn-primary">Save</button>
+					</div>
+				</div>			
+			</form>
+			
 			<hr/>
 			
 			<%
